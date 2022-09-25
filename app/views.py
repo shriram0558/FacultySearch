@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import Application, CollegeProfile, Faculty, Jobcard
 from django.contrib.auth import login, logout, authenticate
-
+from django.db.models import Q
 # Create your views here.
 def colleges(request):
     college_object = CollegeProfile.objects.all()
@@ -22,6 +22,10 @@ def detail(request, pk):
 def tdetail(request, pk):
     college_detail = Faculty.objects.get(id=pk)
     return render(request, "teacherdetail.html", {'obj':college_detail})
+
+def jobcarddetail(request, pk):
+    college_detail = Jobcard.objects.get(id=pk)
+    return render(request, "jobcarddetail.html", {'obj':college_detail})
 
 def handlesignup(request):
     if request.method == 'POST':
@@ -84,6 +88,12 @@ def handlelogout(request):
     logout(request)
     return redirect('/')
 
+    
+def search(request):
+    query = request.GET['query']
+    producttitle = CollegeProfile.objects.filter(Q(name__icontains=query)| Q(location__icontains=query))
+    return render(request, "search.html", {'finalprod':producttitle})
+
 def createteacherprof(request):
     user = request.user
     if user.is_authenticated:
@@ -129,9 +139,30 @@ def createjobcard(request):
             return redirect('/')
     return render(request, "createjobcard.html")
 
+def yourprofile(request):
+    try:
+        profile_object = CollegeProfile.objects.get(user=request.user)
+        applications = Jobcard.objects.filter(college=profile_object)
+    except:
+        return redirect('/')
+    return render(request, "yourprofile.html", {'obj':profile_object, 'new_obj':applications})
 
 def jobcards(request):
     jobcard_object = Jobcard.objects.all()
     return render(request, "jobcards.html", {'obj':jobcard_object})
 
+def apply(request, pk):
+    user = request.user
+    if user.is_authenticated:
+        jobcard_object = Jobcard.objects.get(id=pk)
+        college = jobcard_object.college
+        faculty = Faculty.objects.get(user=request.user)
+        prod = Application(college=college, faculty=faculty, jobcard=jobcard_object)
+        prod.save()
+        return redirect('/')
+    return render(request, "jobcards.html")
 
+def jobcardprofile(request, pk):
+    data = Jobcard.objects.get(id=pk)
+    applicants = Application.objects.filter(college=data.college)
+    return render(request, "jobcardprofile.html", {'obj':data, 'new_obj':applicants})

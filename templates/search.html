@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>productslist</title>
+  
+        <script class="u-script" type="text/javascript" src="{% static 'jquery.js' %}" defer=""></script>
+        <script class="u-script" type="text/javascript" src="{% static 'nicepage.js' %}" defer=""></script>
+    <meta name="generator" content="Nicepage 4.3.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/default-logo.png",
+		"sameAs": []
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="productslist">
+    <meta property="og:type" content="website">
+
+    <style>
+      body {
+    background: #eee
+}
+
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+}
+.container1{
+  width: 80%;
+  margin: auto;
+}
+.heading h2{
+  font-size: 25px;
+  margin: 2% 0%;
+  
+  text-align: center;
+}
+#buttonid a{
+  color: white;
+  text-decoration: none;
+}
+    </style>
+  </head>
+  <body class="u-body">
+      <div class="heading"><h2>Your search results</h2></div>
+      <div class="container1">
+    
+    </div>
+{% for i in finalprod %}
+      <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="row p-2 bg-white border rounded">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{i.image.url}}"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5>{{i.title}}</h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span><b>Author:</b> {{i.author}}</span><br></span><span><b>Pages:</b> {{i.pages}}</span></div>
+                       
+                         
+                        <p class="">{{i.description| truncatechars:150}}<br><br></p>
+                    </div>
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row align-items-center">
+                            <h4 class="mr-1">₹{{i.price}}</h4>
+                        </div>
+                        <h6 class="text-success">Free shipping</h6>
+                        <div class="d-flex flex-column mt-4"><button id="buttonid" class="btn btn-primary btn-sm" type="button"><a href="/productdetails/{{i.prodid}}">detail</a></button><button class="btn btn-outline-primary btn-sm mt-2" type="button"><a href="tel:{{i.phone}}">Contact Seller</a></button></div>
+                    </div>
+                </div>
+                <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
+  </body>
+</html>
