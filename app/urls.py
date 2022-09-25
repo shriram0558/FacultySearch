@@ -8,4 +8,8 @@ urlpatterns = [
     path('tdetail/<int:pk>', views.tdetail, name="tdetail"),
     path('handlesignup', views.handlesignup, name="handlesignup"),
     path('handlelogin', views.handlelogin, name="handlelogin"),
+    path('createcollegeprof', views.createcollegeprof, name="createcollegeprof"),
+    path('createteacherprof', views.createteacherprof, name="createteacherprof"),
+    path('createjobcard', views.createjobcard, name="createjobcard"),
+    path('jobcards', views.jobcards, name="jobcards"),
 ]
