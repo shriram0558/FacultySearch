@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>FacultySearch - Colleges</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <style>
     .card-container{
@@ -12,54 +16,150 @@
       grid-template-columns: auto auto auto;
       gap: 10px;
     }
+
     .mx-auto h1{
       text-align: center;
       margin: 20px 0;
-
     }
+
+    .navbar {
+      background-color: #30E3CA;
+      padding: 1.1%;
+    }
+
+    body {
+      background-color: #E4F9F5;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      overflow-x: hidden;
+    }
+
+    .btn {
+      background-color: #11999E;
+      color: #E4F9F5;
+      border-color: #11999E;
+    }
+
+    #teachers:hover, #search:hover {
+      background-color: #40514E;
+      color: #E4F9F5;
+    }
+
+    #see-job {
+      border: none;
+    }
+
+    .see-all-clg {
+      font-weight: 600;
+      margin: 3% 0 4%;
+    }
+
+    li {
+      padding: 0 6px;
+    }
+
+    .card {
+      margin: 20px;
+      background-color: #E4F9F5;
+      border-color: #E4F9F5;
+    }
+
+    .college {
+      margin: 10px;
+      padding: 10px;
+      background-color: white;
+      border-radius: 10px;
+      border-color: lightgray;
+      border-width: 0.5px;
+      border-style: solid;
+    }
+
+    .college-description {
+      margin: 10px;
+      padding: 5px;
+    }
+
+    .college-img {
+      margin: 10px;
+      padding: 5px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      padding-bottom: 8px;
+    }
+
+    .card-title, .card-text {
+      color: #40514E;
+    }
+
+    .nav-link:hover {
+      opacity: 0.7;
+    }
+
+    .img-fluid {
+      height: 300px;
+      width: 600px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .img-fluid img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .col-lg-5{
+      display: flex;
+      justify-content: center;
+    }
+
   </style>
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="/">Navbar</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">See Jobs</a>
+                <a class="nav-link active" aria-current="page" href="jobcards">See Jobs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Give Job</a>
+                <a class="nav-link active" aria-current="page" href="createjobcard">Give Job</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                <a class="nav-link active" aria-current="page" href="yourprofile">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-outline-success mx-2" aria-current="page" href="teachers">See Teachers</a>
+                <a id="teachers" class="btn" aria-current="page" href="teachers">See Teachers</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button id="search" class="btn" type="submit"><i class="fa fa-search"></i></button>
             </form>
           </div>
         </div>
       </nav>
-      <div class="mx-auto"><h1 class="mx-auto">See all Colleges</h1></div>
+      <div class="mx-auto see-all-clg"><h1 class="mx-auto">College Listing</h1></div>
 
-<div class="card-container mx-5 my-2">
-{% for i in obj %}
-      <div class="card" style="width: 18rem;">
-        <img src="{{i.image.url}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{i.name}}</h5>
-          <p class="card-text">{{i.description}}</p>
-          <a href="detail/{{i.id}}" class="btn btn-primary">See Job</a>
+    <div class="row mb-3" style="max-width: 100%; justify-content:space-evenly;">
+      {% for i in obj %}
+      <div class="col-lg-5 college row g-0">
+        <div class="col col-lg-12 college-img">
+          <img src="{{i.image.url}}" class="img-fluid" alt="...">
+        </div>
+        <div class="col col-lg-12 college-description">
+          <div class="card-body">
+            <h5 class="card-title">{{i.name}}</h5>
+            <p class="card-text">{{i.description|truncatechars:75 }}</p>
+            <a href="detail/{{i.id}}" id="see-job" class="btn btn-dark">See Job</a>
+          </div>
         </div>
       </div>
       {% endfor %}
