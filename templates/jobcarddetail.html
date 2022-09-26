@@ -3,25 +3,176 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Job Card Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
+  <style>
+    body{
+      overflow-x: hidden;
+      background-color: #E4F9F5;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+    }
+
+    .navbar {
+      background-color: #30E3CA;
+      padding: 1.1%;
+    }
+
+    .btn {
+      background-color: #11999E;
+      color: #E4F9F5;
+      border-color: #11999E;
+      transition: all 0.5s;
+    }
+
+    #teachers:hover, #search:hover {
+      background-color: #40514E;
+      color: #E4F9F5;
+    }
+    .nav-link:hover {
+      opacity: 0.7;
+    }
+    li {
+      padding: 0 6px;
+    }
+    .card{
+      background-color: #E4F9F5;
+      border: #E4F9F5 solid 5px;
+      margin: 40px;
+      border-bottom: grey solid 3px;
+    }
+    .row{
+      background-color: #E4F9F5;
+      margin: 40px;
+      display: flex;
+      justify-content: center;
+      border: solid #E4F9F5 5px;
+      margin-bottom: 100px;
+    }
+    .col-md-8{
+      width: 30%;
+      display: flex;
+      align-items: center;
+    }
+    .secondhead{
+      margin: 20px;
+      margin-top: 40px;
+      margin-bottom: 60px;
+      display: flex;
+      justify-content: center;
+      font-size: 60px;
+      font-weight: 800;
+      text-decoration: underline;
+    }
+    .card-text{
+      font-size: 20px;
+      font-weight: 500;
+    }
+    .card-title{
+      font-size: 40px;
+    }
+    .card1{
+      margin: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* border: grey solid 1px; */
+      /* box-shadow: 2px 2px grey; */
+      border-radius: 10px;
+      background-color: white;
+    }
+    .card-body{
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+    }
+
+    .card{
+      display: flex;
+      align-items: left;
+      margin-top: 50px;
+      height: 100%;
+      width: 100%;
+    }
+    .img-fluid {
+      height: 100%;
+      object-fit: cover;
+    }
+    .col-md-4{
+      margin-left: 0px ;
+    }
+    .col-md-8{
+      width: 40%;
+      height: 50%;
+      margin-left: 10% ;
+    }
+    .card-title{
+      font-size: 35px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    .card-text{
+      font-size: 16px;
+    }
+
+  </style>
   <body>
-    <div class="card mb-3" style="max-width: 540px;">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="../static/logo.png" alt="" style="width: 60px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">See Jobs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Give Job</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a id="teachers" class="btn" aria-current="page" href="teachers">See Teachers</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button id="search" class="btn" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
           <img src="{{obj.college.image.url}}" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">{{obj.college.name}}</h5>
+            <h5 class="card-title">{{obj.job_title}}</h5>
             <p class="card-text">{{obj.job_description}}</p>
-            <p class="card-text"><small class="text-muted">{{obj.naac_rating}}</small></p>
-            <a href="apply/{{obj.id}}" class="btn btn-primary">See Job</a>
+            <p class="card-text">{{obj.deadline}}</p>
+            <p class="card-text">{{obj.salary_range}}</p>
+            <p class="card-text">{{obj.stream}}</p>
+            <p class="card-text"><small class="text-muted">{{obj.speciality}}</small></p>
+            <a href="apply/{{obj.id}}" class="btn btn-dark" style="width: 40%;">Apply Now</a>
           </div>
         </div>
       </div>
     </div>
+   
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
   </body>
 </html>
