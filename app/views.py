@@ -86,13 +86,7 @@ def createcollegeprof(request):
 
 def handlelogout(request):
     logout(request)
-    return redirect('/')
-
-    
-def search(request):
-    query = request.GET['query']
-    producttitle = CollegeProfile.objects.filter(Q(name__icontains=query)| Q(location__icontains=query))
-    return render(request, "search.html", {'finalprod':producttitle})
+    return render(request, "login.html")
 
 def createteacherprof(request):
     user = request.user
@@ -146,7 +140,6 @@ def yourprofile(request):
     except:
         return redirect('/')
     return render(request, "yourprofile.html", {'obj':profile_object, 'new_obj':applications})
-
 def jobcards(request):
     jobcard_object = Jobcard.objects.all()
     return render(request, "jobcards.html", {'obj':jobcard_object})
@@ -166,3 +159,8 @@ def jobcardprofile(request, pk):
     data = Jobcard.objects.get(id=pk)
     applicants = Application.objects.filter(college=data.college)
     return render(request, "jobcardprofile.html", {'obj':data, 'new_obj':applicants})
+
+def search(request):
+    query = request.GET['query']
+    producttitle = CollegeProfile.objects.filter(Q(name__icontains=query)| Q(location__icontains=query))
+    return render(request, "search.html", {'finalprod':producttitle})
